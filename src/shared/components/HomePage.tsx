@@ -25,6 +25,15 @@ export const HomePage = () => {
 						navigate('NerdSwipe');
 					}}
 				/>
+
+				<HomeButton
+					title='Interesse example'
+					subTitle='A classic Tinder-like swipe application.'
+					Icon={AnimalIcon}
+					onPress={() => {
+						navigate('Interests');
+					}}
+				/>
 			</ButtonsContainer>
 		</StyledPage>
 	);

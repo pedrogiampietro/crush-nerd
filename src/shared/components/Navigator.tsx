@@ -4,10 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NerdMatchPage, type MatchPageParams } from '../../nerds/NerdMatchPage';
 import { NerdSwipePage } from '../../nerds/NerdSwipePage';
 import { HomePage } from './HomePage';
+import { InterestsPage } from './InterestsPage';
 
 export type RootStackParamList = {
 	Home: undefined;
 	NerdSwipe: undefined;
+	Interests: undefined;
 	NerdMatch: MatchPageParams;
 };
 
@@ -28,6 +30,7 @@ export const Navigator = () => (
 				component={NerdMatchPage}
 				options={{ presentation: 'fullScreenModal' }}
 			/>
+			<RootStack.Screen name='Interests' component={InterestsPage} />
 		</RootStack.Navigator>
 	</NavigationContainer>
 );
