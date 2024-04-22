@@ -8,7 +8,8 @@ import {
 	Button,
 } from 'react-native';
 import { Chip } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, type NavigationProp } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const interests = [
 	'CS-GO',
@@ -49,7 +50,7 @@ const interests = [
 
 export const InterestsPage = () => {
 	const [selectedInterests, setSelectedInterests] = useState([]);
-	const navigation = useNavigation();
+	const { navigate } = useNavigation<NavigationProp<RootStackParamList>>();
 
 	const toggleInterest = (interest) => {
 		if (selectedInterests.includes(interest)) {
@@ -82,10 +83,12 @@ export const InterestsPage = () => {
 				numColumns={3}
 			/>
 			{selectedInterests.length === 5 && (
-				<Button
-					title='Próximo'
-					onPress={() => navigation.navigate('NextPage')}
-				/>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => navigate('ConnectionOption')}
+				>
+					<Text style={styles.buttonText}>Próximo</Text>
+				</TouchableOpacity>
 			)}
 		</SafeAreaView>
 	);
@@ -116,5 +119,18 @@ const styles = StyleSheet.create({
 	},
 	chipText: {
 		fontSize: 11,
+	},
+	button: {
+		marginTop: 20,
+		backgroundColor: 'black',
+		borderWidth: 1,
+		padding: 10,
+		alignItems: 'center',
+	},
+	buttonText: {
+		color: 'white',
+		fontWeight: 'bold',
+		fontFamily: 'Roboto',
+		fontSize: 16,
 	},
 });

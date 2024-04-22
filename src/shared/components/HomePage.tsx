@@ -2,7 +2,6 @@ import styled from '@emotion/native';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AnimalIcon } from '../icons/AnimalIcon';
 import { BeeIcon } from '../icons/BeeIcon';
 import { BackgroundGradient } from './BackgroundGradient';
 import { HomeButton } from './HomeButton';
@@ -20,7 +19,7 @@ export const HomePage = () => {
 				<HomeButton
 					title='Nerd example'
 					subTitle='A classic Tinder-like swipe application.'
-					Icon={AnimalIcon}
+					Icon={BeeIcon}
 					onPress={() => {
 						navigate('NerdSwipe');
 					}}
@@ -29,7 +28,7 @@ export const HomePage = () => {
 				<HomeButton
 					title='Interesse example'
 					subTitle='A classic Tinder-like swipe application.'
-					Icon={AnimalIcon}
+					Icon={BeeIcon}
 					onPress={() => {
 						navigate('Interests');
 					}}
