@@ -129,8 +129,7 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		color: 'white',
-		fontWeight: 'bold',
-		fontFamily: 'Roboto',
+		fontFamily: 'roboto-bold',
 		fontSize: 16,
 	},
 });

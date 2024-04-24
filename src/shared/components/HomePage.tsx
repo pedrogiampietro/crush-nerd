@@ -33,6 +33,15 @@ export const HomePage = () => {
 						navigate('Interests');
 					}}
 				/>
+
+				<HomeButton
+					title='Match Pages example'
+					subTitle='A classic Tinder-like swipe application.'
+					Icon={BeeIcon}
+					onPress={() => {
+						navigate('MatchesPage');
+					}}
+				/>
 			</ButtonsContainer>
 		</StyledPage>
 	);

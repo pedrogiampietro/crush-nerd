@@ -6,6 +6,8 @@ import { NerdSwipePage } from '../../nerds/NerdSwipePage';
 import { HomePage } from './HomePage';
 import { InterestsPage } from './InterestsPage';
 import { ConnectionOptions } from './ConnectionOptionPage';
+import { LoginScreen } from '../../views/LoginPage';
+import { MatchesPage } from '../../views/MatchesPage';
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -13,6 +15,8 @@ export type RootStackParamList = {
 	NerdMatch: MatchPageParams;
 	Interests: undefined;
 	ConnectionOption: undefined;
+	LoginPage: undefined;
+	MatchesPage: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +38,8 @@ export const Navigator = () => (
 			/>
 			<RootStack.Screen name='Interests' component={InterestsPage} />
 			<RootStack.Screen name='ConnectionOption' component={ConnectionOptions} />
+			<RootStack.Screen name='LoginPage' component={LoginScreen} />
+			<RootStack.Screen name='MatchesPage' component={MatchesPage} />
 		</RootStack.Navigator>
 	</NavigationContainer>
 );
