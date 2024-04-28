@@ -42,6 +42,14 @@ export const HomePage = () => {
 						navigate('MatchesPage');
 					}}
 				/>
+				<HomeButton
+					title='Login Pages example'
+					subTitle='A classic Tinder-like swipe application.'
+					Icon={BeeIcon}
+					onPress={() => {
+						navigate('LoginPage');
+					}}
+				/>
 			</ButtonsContainer>
 		</StyledPage>
 	);

@@ -7,6 +7,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: true,
+		distance: 1.3,
+		isOnline: true,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Lily',
@@ -14,6 +18,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1615497001839-b0a0eac3274c?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: false,
+		distance: 1.3,
+		isOnline: true,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Diego',
@@ -21,6 +29,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: false,
+		distance: 1.3,
+		isOnline: true,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Arnold',
@@ -28,6 +40,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://plus.unsplash.com/premium_photo-1667030474693-6d0632f97029?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: true,
+		distance: 1.3,
+		isOnline: true,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Gus',
@@ -35,6 +51,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: true,
+		distance: 1.3,
+		isOnline: false,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Comma',
@@ -42,6 +62,10 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: false,
+		distance: 1.3,
+		isOnline: true,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 	{
 		name: 'Stan',
@@ -49,5 +73,9 @@ export const nerds: NerdDataItem[] = [
 		imageUrl:
 			'https://images.unsplash.com/photo-1606225457115-9b0de873c5db?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		hasLikedMyProfile: true,
+		distance: 1.3,
+		isOnline: false,
+		city: 'São Paulo',
+		percentMatch: 97,
 	},
 ];

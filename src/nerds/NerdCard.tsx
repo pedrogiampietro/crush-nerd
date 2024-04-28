@@ -12,6 +12,7 @@ import { colors } from '../shared/colors';
 import { type NerdAction } from './NerdAction';
 import { NerdCardBottomView } from './NerdCardBottomView';
 import { type NerdDataItem } from './NerdDataItem';
+import { Text } from 'react-native';
 
 type Props = RenderCardProps<NerdDataItem> & {
 	onAction: (action: NerdAction) => void;

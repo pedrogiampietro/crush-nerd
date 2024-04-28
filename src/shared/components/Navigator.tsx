@@ -8,6 +8,7 @@ import { InterestsPage } from './InterestsPage';
 import { ConnectionOptions } from './ConnectionOptionPage';
 import { LoginScreen } from '../../views/LoginPage';
 import { MatchesPage } from '../../views/MatchesPage';
+import { ProfileMatchPage } from '../../views/ProfileMatchPage';
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamList = {
 	ConnectionOption: undefined;
 	LoginPage: undefined;
 	MatchesPage: undefined;
+	ProfileMatchPage: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -40,6 +42,7 @@ export const Navigator = () => (
 			<RootStack.Screen name='ConnectionOption' component={ConnectionOptions} />
 			<RootStack.Screen name='LoginPage' component={LoginScreen} />
 			<RootStack.Screen name='MatchesPage' component={MatchesPage} />
+			<RootStack.Screen name='ProfileMatchPage' component={ProfileMatchPage} />
 		</RootStack.Navigator>
 	</NavigationContainer>
 );

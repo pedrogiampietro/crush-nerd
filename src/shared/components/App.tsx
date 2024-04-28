@@ -1,20 +1,21 @@
-import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
+
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useLoadFonts } from '../fonts/useLoadFonts';
 import { Navigator } from './Navigator';
-import AppLoading from 'expo-app-loading';
+import { Loading } from './Loading';
 
-preventAutoHideAsync().catch(console.error);
+SplashScreen.preventAutoHideAsync();
 
 export const App = () => {
 	const { areFontsLoaded } = useLoadFonts();
 
 	if (!areFontsLoaded) {
-		return <AppLoading />;
+		return <Loading />;
 	}
 
-	hideAsync().catch(console.error);
+	SplashScreen.hideAsync();
 
 	return (
 		<SafeAreaProvider>

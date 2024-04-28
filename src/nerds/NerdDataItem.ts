@@ -3,4 +3,8 @@ export type NerdDataItem = {
 	age: number;
 	imageUrl: string;
 	hasLikedMyProfile: boolean;
+	distance: number;
+	isOnline: boolean;
+	city: string;
+	percentMatch: number;
 };
