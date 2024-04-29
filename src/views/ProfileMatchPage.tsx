@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
 	View,
 	Text,
@@ -8,52 +8,30 @@ import {
 	ScrollView,
 	Dimensions,
 } from 'react-native';
+import { type SwipeableCardStackRef } from 'react-native-swipeable-card-stack';
+import { type NerdAction } from '../nerds/NerdAction';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, {
-	useSharedValue,
-	useAnimatedStyle,
-	useDerivedValue,
-	withTiming,
-	interpolate,
-} from 'react-native-reanimated';
 
-function BottomSheet({ isOpen, toggleSheet, duration = 500, children }) {
-	const screenHeight = Dimensions.get('window').height;
-	const progress = useDerivedValue(() =>
-		withTiming(isOpen.value ? 0 : 1, { duration })
-	);
-
-	const sheetStyle = useAnimatedStyle(() => ({
-		height: interpolate(
-			progress.value,
-			[0, 1],
-			[screenHeight / 2, screenHeight]
-		),
-		transform: [{ translateY: interpolate(progress.value, [0, 1], [0, -200]) }],
-	}));
-
-	return (
-		<Animated.View style={[styles.card, sheetStyle]}>
-			<TouchableOpacity style={styles.maximizeIcon} onPress={toggleSheet}>
-				<Ionicons name='chevron-up' size={24} color='#000' />
-			</TouchableOpacity>
-			<View style={{ flex: 1 }}>
-				<ScrollView>{children}</ScrollView>
-			</View>
-		</Animated.View>
-	);
-}
+import { NerdCardBottomView } from '../nerds/NerdCardBottomView';
 
 export function ProfileMatchPage({ route }) {
 	const { match } = route.params;
-	const isOpen = useSharedValue(false);
+	const ref = useRef<SwipeableCardStackRef>(null);
 
-	const toggleSheet = () => {
-		isOpen.value = !isOpen.value;
-	};
+	const onAction = useCallback((action: NerdAction) => {
+		if (action === 'swipe-left') {
+			ref.current?.swipe('left');
+		}
+		if (action === 'swipe-right') {
+			ref.current?.swipe('right');
+		}
+		if (action === 'undo') {
+			ref.current?.unswipe();
+		}
+	}, []);
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<Image style={styles.profilePic} source={{ uri: match.imageUrl }} />
 			<View style={styles.overlay}>
 				<View style={styles.header}>
@@ -72,7 +50,7 @@ export function ProfileMatchPage({ route }) {
 					</View>
 				</View>
 			</View>
-			<BottomSheet isOpen={isOpen} toggleSheet={toggleSheet}>
+			<View style={styles.card}>
 				<Text style={styles.aboutTitle}>About</Text>
 				<Text style={styles.aboutText}>
 					A good listener. I love having a good talk to know each other’s side
@@ -90,16 +68,13 @@ export function ProfileMatchPage({ route }) {
 				<Text style={styles.interestText}>✍🏻 Writing</Text>
 				<Text style={styles.interestText}>🙂 People</Text>
 				<Text style={styles.interestText}>💪 Gym & Fitness</Text>
-				<Text style={styles.interestTitle}>Interest</Text>
-				<Text style={styles.interestText}>🍃 Nature</Text>
-				<Text style={styles.interestText}>🏝 Travel</Text>
-				<Text style={styles.interestText}>✍🏻 Writing</Text>
-				<Text style={styles.interestText}>🙂 People</Text>
-				<Text style={styles.interestText}>💪 Gym & Fitness</Text>
-			</BottomSheet>
-		</View>
+			</View>
+
+			<NerdCardBottomView onAction={onAction} />
+		</ScrollView>
 	);
 }
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -160,12 +135,7 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 40,
 		borderTopRightRadius: 40,
 		marginTop: -35,
-	},
-	maximizeIcon: {
-		position: 'absolute',
-		top: 10,
-		left: '50%',
-		transform: [{ translateX: -12 }],
+		marginBottom: 150,
 	},
 	aboutTitle: {
 		fontSize: 24,

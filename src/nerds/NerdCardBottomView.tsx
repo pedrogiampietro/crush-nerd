@@ -10,8 +10,8 @@ import { UndoIcon } from '../shared/icons/UndoIcon';
 import { type NerdAction } from './NerdAction';
 
 type Props = {
-	name: string;
-	age: number;
+	name?: string;
+	age?: number;
 	onAction: (action: NerdAction) => void;
 };
 
@@ -39,8 +39,12 @@ export const NerdCardBottomView = ({ name, age, onAction }: Props) => {
 					height: height / 2,
 				}}
 			></LinearGradient>
+
 			<ContentContainer>
-				<Label>{`${name} - ${age}`}</Label>
+				{name && name.length > 0 && age && age > 0 ? (
+					<Label>{`${name} - ${age}`}</Label>
+				) : null}
+
 				<ButtonsContainer>
 					<RoundButton
 						Icon={CloseIcon}
