@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { NerdCardBottomView } from '../nerds/NerdCardBottomView';
 
-export function ProfileMatchPage({ route }) {
+export function ProfileMatchPage({ route }: any) {
 	const { match } = route.params;
 	const ref = useRef<SwipeableCardStackRef>(null);
 

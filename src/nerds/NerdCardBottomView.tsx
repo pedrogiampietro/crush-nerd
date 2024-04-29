@@ -52,6 +52,8 @@ export const NerdCardBottomView = ({ name, age, onAction }: Props) => {
 							onAction('swipe-left');
 						}}
 						color={colors.swipeLeft}
+						iconColor={colors.swipeLeftIcon}
+						backgroundColor={colors.swipeLeft}
 						size={80}
 					/>
 					<RoundButton
@@ -60,6 +62,8 @@ export const NerdCardBottomView = ({ name, age, onAction }: Props) => {
 							onAction('undo');
 						}}
 						color={colors.unswipe}
+						iconColor={colors.unswipeIcon}
+						backgroundColor={colors.unswipe}
 						size={70}
 					/>
 					<RoundButton
@@ -68,6 +72,8 @@ export const NerdCardBottomView = ({ name, age, onAction }: Props) => {
 							onAction('swipe-right');
 						}}
 						color={colors.swipeRight}
+						iconColor={colors.swipeRightIcon}
+						backgroundColor={colors.swipeRight}
 						size={80}
 					/>
 				</ButtonsContainer>
