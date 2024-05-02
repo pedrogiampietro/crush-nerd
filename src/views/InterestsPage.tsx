@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	Button,
 } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { Chip } from 'react-native-paper';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -75,6 +76,7 @@ export const InterestsPage = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
+			<StatusBar style='dark' />
 			<Text style={styles.title}>Escolhe abaixo 5 itens de seu interesse</Text>
 			<FlatList
 				data={interests}
