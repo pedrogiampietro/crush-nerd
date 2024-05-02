@@ -26,7 +26,7 @@ export const NerdCardBottomView = ({
   return (
     <Container>
       <LinearGradient
-        colors={["rgba(0,0,0,0.8)", "transparent"]}
+        colors={["rgba(0, 0, 0, 0.356)", "transparent"]}
         style={{
           position: "absolute",
           left: 0,
@@ -36,7 +36,7 @@ export const NerdCardBottomView = ({
         }}
       ></LinearGradient>
       <LinearGradient
-        colors={["transparent", "rgba(0,0,0,0.8)"]}
+        colors={["transparent", "rgba(0, 0, 0, 0.356)"]}
         style={{
           position: "absolute",
           left: 0,

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  FlatList,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Animated, {
@@ -20,6 +21,14 @@ import { type NerdAction } from "../nerds/NerdAction";
 import { NerdCardBottomView } from "../nerds/NerdCardBottomView";
 import { SwipeableCardStackRef } from "react-native-swipeable-card-stack";
 import { MatchBadge } from "../shared/components/MatchBadge";
+
+const interests = [
+  { icon: "leaf", text: "Nature" },
+  { icon: "airplane", text: "Travel" },
+  { icon: "pencil", text: "Writing" },
+  { icon: "happy", text: "People" },
+  { icon: "body", text: "Gym & Fitness" },
+];
 
 function BottomSheet({ isOpen, toggleSheet, duration = 500, children }: any) {
   const screenHeight = Dimensions.get("window").height;
@@ -44,12 +53,15 @@ function BottomSheet({ isOpen, toggleSheet, duration = 500, children }: any) {
       <TouchableOpacity style={styles.maximizeIcon} onPress={toggleSheet}>
         <Ionicons name="chevron-up" size={24} color="#000" />
       </TouchableOpacity>
-      <View style={{ flex: 1, height: "100%" }}>
-        <ScrollView>{children}</ScrollView>
-      </View>
+      <FlatList
+        style={{ flex: 1 }}
+        data={[{ key: "dummy" }]} // Adding a dummy item to prevent rendering issues
+        renderItem={() => <>{children}</>}
+      />
     </Animated.View>
   );
 }
+
 export function ProfileMatchPage({ route }: any) {
   const { match } = route.params;
   const isOpen = useSharedValue(true);
@@ -70,6 +82,21 @@ export function ProfileMatchPage({ route }: any) {
       ref.current?.unswipe();
     }
   }, []);
+
+  function InterestCard({ icon, children }) {
+    return (
+      <View style={styles.interestCard}>
+        <Ionicons name={icon} size={16} color="#DD88CF" />
+        <Text
+          style={styles.interestCardText}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {children}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -95,37 +122,33 @@ export function ProfileMatchPage({ route }: any) {
           </View>
         </View>
       </View>
+
       <BottomSheet isOpen={isOpen} toggleSheet={toggleSheet}>
         <Text style={styles.aboutTitle}>About</Text>
         <Text style={styles.aboutText}>
           A good listener. I love having a good talk to know each other’s side
-          😍.
+          😍. A good listener. I love having a good talk to know each other’s
+          side 😍. A good listener. I love having a good talk to know each
+          other’s side 😍. A good listener. I love having a good talk to know
+          each other’s side 😍. A good listener. I love having a good talk to
+          know each other’s side 😍. A good listener. I love having a good talk
+          to know each other’s side 😍. A good listener. I love having a good
+          talk to know each other’s side 😍. A good listener. I love having a
+          good talk to know each other’s side 😍. A good listener. I love having
+          a good talk to know each other’s side 😍. A good listener. I love
+          having a good talk to know each other’s side 😍. A good listener. I
+          love having a good talk to know each other’s side 😍. A good listener.
+          I love having a good talk to know each other’s side 😍.
         </Text>
         <Text style={styles.interestTitle}>Interest</Text>
-        <Text style={styles.interestText}>🍃 Nature</Text>
-        <Text style={styles.interestText}>🏝 Travel</Text>
-        <Text style={styles.interestText}>✍🏻 Writing</Text>
-        <Text style={styles.interestText}>🙂 People</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestTitle}>Interest</Text>
-        <Text style={styles.interestText}>🍃 Nature</Text>
-        <Text style={styles.interestText}>🏝 Travel</Text>
-        <Text style={styles.interestText}>✍🏻 Writing</Text>
-        <Text style={styles.interestText}>🙂 People</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestTitle}>Interest</Text>
-        <Text style={styles.interestText}>🍃 Nature</Text>
-        <Text style={styles.interestText}>🏝 Travel</Text>
-        <Text style={styles.interestText}>✍🏻 Writing</Text>
-        <Text style={styles.interestText}>🙂 People</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
-        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <FlatList
+          data={interests}
+          renderItem={({ item }) => (
+            <InterestCard icon={item.icon}>{item.text}</InterestCard>
+          )}
+          keyExtractor={(item) => item.text}
+          numColumns={3}
+        />
       </BottomSheet>
 
       <View style={styles.bottomView}>
@@ -154,6 +177,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     marginTop: 50,
   },
@@ -235,14 +259,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000",
   },
+  interestCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#4B164C",
+    borderColor: "#FFF",
+    borderWidth: 1,
+    borderRadius: 20,
+    width: 115,
+    height: 40,
+    marginBottom: 10,
+    paddingLeft: 10,
+    margin: 5,
+  },
+  interestCardText: {
+    marginLeft: 10,
+    color: "#FFF",
+  },
   interestTitle: {
     fontSize: 24,
     color: "#000",
     marginTop: 10,
-  },
-  interestText: {
-    fontSize: 16,
-    color: "#000",
   },
   bottomView: {
     position: "absolute",
