@@ -11,6 +11,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: true,
     city: "São Paulo",
     percentMatch: 44,
+    message: "What about that new jacket if I ...",
+    lastMessageTime: "09:18",
+    read: false,
   },
   {
     name: "Lily",
@@ -22,6 +25,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: true,
     city: "São Paulo",
     percentMatch: 66,
+    message: "I know right 😉",
+    lastMessageTime: "09:18",
+    read: true,
   },
   {
     name: "Diego",
@@ -33,6 +39,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: true,
     city: "São Paulo",
     percentMatch: 77,
+    message: "I’ve already registered, can’t wai...",
+    lastMessageTime: "09:18",
+    read: true,
   },
   {
     name: "Arnold",
@@ -44,6 +53,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: true,
     city: "São Paulo",
     percentMatch: 12,
+    message: "It will have two lines of heading ...",
+    lastMessageTime: "09:18",
+    read: true,
   },
   {
     name: "Gus",
@@ -55,6 +67,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: false,
     city: "São Paulo",
     percentMatch: 23,
+    message: "teste",
+    lastMessageTime: "09:18",
+    read: false,
   },
   {
     name: "Comma",
@@ -66,6 +81,9 @@ export const nerds: NerdDataItem[] = [
     isOnline: true,
     city: "São Paulo",
     percentMatch: 44,
+    message: "teste",
+    lastMessageTime: "09:18",
+    read: false,
   },
   {
     name: "Stan",
@@ -77,5 +95,8 @@ export const nerds: NerdDataItem[] = [
     isOnline: false,
     city: "São Paulo",
     percentMatch: 99,
+    message: "teste",
+    lastMessageTime: "09:18",
+    read: true,
   },
 ];

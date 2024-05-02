@@ -1,44 +1,44 @@
-import styled, { css } from '@emotion/native';
-import { useNavigation } from '@react-navigation/native';
-import { Pressable } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import { colors } from '../shared/colors';
-import { getBrandedText } from '../shared/fonts/getBrandedText';
+import styled, { css } from "@emotion/native";
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
+import { colors } from "../shared/colors";
+import { getBrandedText } from "../shared/fonts/getBrandedText";
 
 type Props = {
-	nerdName: string;
+  nerdName: string;
 };
 
 export const NerdTalkWithButton = ({ nerdName }: Props) => {
-	const { goBack } = useNavigation();
+  const { goBack } = useNavigation();
 
-	return (
-		<Container entering={FadeInDown.delay(300)}>
-			<Pressable
-				onPress={goBack}
-				style={css({
-					backgroundColor: colors.primary,
-					padding: 16,
-					alignSelf: 'stretch',
-					alignItems: 'center',
-					borderRadius: 16,
-					shadowColor: colors.primary,
-					shadowOffset: { width: 0, height: 4 },
-					shadowOpacity: 0.3,
-					shadowRadius: 5,
-					elevation: 8,
-				})}
-			>
-				<Label>{`Have a chat with ${nerdName} →`}</Label>
-			</Pressable>
-		</Container>
-	);
+  return (
+    <Container entering={FadeInDown.delay(300)}>
+      <Pressable
+        onPress={goBack}
+        style={css({
+          backgroundColor: "#4B164C",
+          padding: 16,
+          alignSelf: "stretch",
+          alignItems: "center",
+          borderRadius: 16,
+          shadowColor: colors.primary,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 5,
+          elevation: 8,
+        })}
+      >
+        <Label>{`Have a chat with ${nerdName} →`}</Label>
+      </Pressable>
+    </Container>
+  );
 };
 
 const Container = styled(Animated.View)({});
 
 const Label = getBrandedText({
-	color: 'white',
-	fontFamily: 'roboto-medium',
-	fontSize: 20,
+  color: "white",
+  fontFamily: "roboto-medium",
+  fontSize: 20,
 });

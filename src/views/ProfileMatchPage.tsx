@@ -55,7 +55,7 @@ function BottomSheet({ isOpen, toggleSheet, duration = 500, children }: any) {
       </TouchableOpacity>
       <FlatList
         style={{ flex: 1 }}
-        data={[{ key: "dummy" }]} // Adding a dummy item to prevent rendering issues
+        data={[{ key: "dummy" }]}
         renderItem={() => <>{children}</>}
       />
     </Animated.View>
@@ -83,7 +83,7 @@ export function ProfileMatchPage({ route }: any) {
     }
   }, []);
 
-  function InterestCard({ icon, children }) {
+  function InterestCard({ icon, children }: any) {
     return (
       <View style={styles.interestCard}>
         <Ionicons name={icon} size={16} color="#DD88CF" />
