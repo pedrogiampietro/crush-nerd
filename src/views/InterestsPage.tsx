@@ -102,10 +102,11 @@ const styles = StyleSheet.create({
 		marginTop: 50,
 	},
 	title: {
-		fontSize: 20,
-		fontWeight: 'bold',
+		fontSize: 24,
+		fontFamily: 'roboto-bold',
 		textAlign: 'center',
 		marginBottom: 20,
+		color: '#4B164C',
 	},
 	item: {
 		flex: 1,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
 	chip: {
 		margin: 3,
 		backgroundColor: 'transparent',
-		borderColor: 'black',
+		borderColor: '#4B164C',
 		borderWidth: 1,
 	},
 	chipText: {
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		marginTop: 20,
-		backgroundColor: 'black',
+		backgroundColor: '#4B164C',
 		borderWidth: 1,
 		padding: 10,
 		alignItems: 'center',

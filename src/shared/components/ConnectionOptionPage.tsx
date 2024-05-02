@@ -53,9 +53,10 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 20,
+		fontFamily: 'roboto-bold',
 		textAlign: 'center',
+		marginBottom: 20,
+		color: '#4B164C',
 	},
 	option: {
 		flexDirection: 'row',
@@ -68,8 +69,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		marginTop: 20,
-		backgroundColor: 'black',
-		borderColor: 'purple',
+		backgroundColor: '#4B164C',
 		borderWidth: 1,
 		padding: 10,
 		alignItems: 'center',
