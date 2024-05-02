@@ -8,7 +8,7 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -28,12 +28,15 @@ function BottomSheet({ isOpen, toggleSheet, duration = 500, children }: any) {
   );
 
   const sheetStyle = useAnimatedStyle(() => ({
-    height: interpolate(
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    top: interpolate(
       progress.value,
       [0, 1],
-      [screenHeight / 2, screenHeight]
+      [screenHeight / 2, screenHeight * 0.2]
     ),
-    transform: [{ translateY: interpolate(progress.value, [0, 1], [0, -200]) }],
   }));
 
   return (
@@ -47,7 +50,6 @@ function BottomSheet({ isOpen, toggleSheet, duration = 500, children }: any) {
     </Animated.View>
   );
 }
-
 export function ProfileMatchPage({ route }: any) {
   const { match } = route.params;
   const isOpen = useSharedValue(true);
@@ -74,10 +76,13 @@ export function ProfileMatchPage({ route }: any) {
       <Image style={styles.profilePic} source={{ uri: match.imageUrl }} />
       <View style={styles.overlay}>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer}>
             <Ionicons name="arrow-back" size={24} color="#FFF" />
           </TouchableOpacity>
-          <Text style={styles.distance}>{match.distance}km away</Text>
+          <View style={styles.distanceContainer}>
+            <MaterialIcons name="location-on" size={24} color="#FFF" />
+            <Text style={styles.distance}>{match.distance}km away</Text>
+          </View>
         </View>
         <View style={styles.infoContainer}>
           <Text style={styles.nameAge}>
@@ -114,9 +119,16 @@ export function ProfileMatchPage({ route }: any) {
         <Text style={styles.interestText}>✍🏻 Writing</Text>
         <Text style={styles.interestText}>🙂 People</Text>
         <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
+        <Text style={styles.interestText}>💪 Gym & Fitness</Text>
       </BottomSheet>
 
-      <View>
+      <View style={styles.bottomView}>
         <NerdCardBottomView onAction={onAction} sizeButtons="small" />
       </View>
     </View>
@@ -145,8 +157,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 50,
   },
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderColor: "#FFF",
+    borderWidth: 1,
+    borderRadius: 24,
+    width: 48,
+    height: 48,
+  },
+  distanceContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderColor: "#FFF",
+    borderWidth: 1,
+    borderRadius: 20,
+    width: 120,
+    height: 40,
+  },
   distance: {
-    fontSize: 16,
+    fontSize: 14,
     color: "#FFF",
   },
   infoContainer: {
@@ -210,5 +243,10 @@ const styles = StyleSheet.create({
   interestText: {
     fontSize: 16,
     color: "#000",
+  },
+  bottomView: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });
