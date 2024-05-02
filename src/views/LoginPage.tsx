@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 
-export function LoginScreen() {
+export function LoginPage() {
 	return (
 		<View style={styles.container}>
 			<StatusBar style='auto' />

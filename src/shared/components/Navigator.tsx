@@ -1,15 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-import { NerdMatchPage, type MatchPageParams } from '../../nerds/NerdMatchPage';
-import { NerdSwipePage } from '../../nerds/NerdSwipePage';
 import { HomePage } from '../../views/HomePage';
 import { InterestsPage } from '../../views/InterestsPage';
-import { ConnectionOptions } from './ConnectionOptionPage';
-import { LoginScreen } from '../../views/LoginPage';
 import { MatchesPage } from '../../views/MatchesPage';
-import { ProfileMatchPage } from '../../views/ProfileMatchPage';
 import { MessagePage } from '../../views/MessagesPage';
+import { ProfileMatchPage } from '../../views/ProfileMatchPage';
+import { NerdMatchPage, type MatchPageParams } from '../../nerds/NerdMatchPage';
+import { ConnectionOptions } from './ConnectionOptionPage';
+import { LoginPage } from '../../views/LoginPage';
 import { ChatPage } from '../../views/ChatPage';
 
 export type RootStackParamList = {
@@ -25,30 +26,103 @@ export type RootStackParamList = {
 	ChatPage: undefined;
 };
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 export const Navigator = () => (
 	<NavigationContainer>
-		<RootStack.Navigator
+		<Stack.Navigator
 			initialRouteName='Home'
 			screenOptions={{
 				headerShown: false,
 			}}
 		>
-			<RootStack.Screen name='Home' component={HomePage} />
-			<RootStack.Screen name='NerdSwipe' component={NerdSwipePage} />
-			<RootStack.Screen
-				name='NerdMatch'
-				component={NerdMatchPage}
-				options={{ presentation: 'fullScreenModal' }}
-			/>
-			<RootStack.Screen name='Interests' component={InterestsPage} />
-			<RootStack.Screen name='ConnectionOption' component={ConnectionOptions} />
-			<RootStack.Screen name='LoginPage' component={LoginScreen} />
-			<RootStack.Screen name='MatchesPage' component={MatchesPage} />
-			<RootStack.Screen name='ProfileMatchPage' component={ProfileMatchPage} />
-			<RootStack.Screen name='MessagePage' component={MessagePage} />
-			<RootStack.Screen name='ChatPage' component={ChatPage} />
-		</RootStack.Navigator>
+			<Stack.Screen name='TabNavigator' component={TabNavigator} />
+			<Stack.Screen name='ProfileMatchPage' component={ProfileMatchPage} />
+			<Stack.Screen name='NerdMatch' component={NerdMatchPage} />
+			<Stack.Screen name='ConnectionOption' component={ConnectionOptions} />
+			<Stack.Screen name='LoginPage' component={LoginPage} />
+			<Stack.Screen name='NerdMatchPage' component={NerdMatchPage} />
+			<Stack.Screen name='ChatPage' component={ChatPage} />
+		</Stack.Navigator>
 	</NavigationContainer>
+);
+
+export const TabNavigator = () => (
+	<Tab.Navigator
+		initialRouteName='Home'
+		screenOptions={{
+			headerShown: false,
+			tabBarActiveTintColor: '#F63A6E',
+			tabBarStyle: {
+				backgroundColor: '#FFFFFF',
+				borderTopColor: 'transparent',
+				borderRadius: 30,
+				marginHorizontal: 10,
+				marginBottom: 20,
+				position: 'absolute',
+				bottom: 0,
+				left: 0,
+				right: 0,
+				height: 64,
+			},
+		}}
+	>
+		<Tab.Screen
+			name='Home'
+			component={HomePage}
+			options={{
+				tabBarIcon: ({ color, size, focused }) => (
+					<Ionicons
+						name={focused ? 'home' : 'home-outline'}
+						color={color}
+						size={size}
+					/>
+				),
+				tabBarLabel: () => null,
+			}}
+		/>
+		<Tab.Screen
+			name='Interests'
+			component={InterestsPage}
+			options={{
+				tabBarIcon: ({ color, size, focused }) => (
+					<Ionicons
+						name={focused ? 'people' : 'people-outline'}
+						color={color}
+						size={size}
+					/>
+				),
+				tabBarLabel: () => null,
+			}}
+		/>
+		<Tab.Screen
+			name='MatchesPage'
+			component={MatchesPage}
+			options={{
+				tabBarIcon: ({ color, size, focused }) => (
+					<Ionicons
+						name={focused ? 'add-circle' : 'add-circle-outline'}
+						color={color}
+						size={size}
+					/>
+				),
+				tabBarLabel: () => null,
+			}}
+		/>
+		<Tab.Screen
+			name='MessagePage'
+			component={MessagePage}
+			options={{
+				tabBarIcon: ({ color, size, focused }) => (
+					<Ionicons
+						name={focused ? 'chatbubble' : 'chatbubble-outline'}
+						color={color}
+						size={size}
+					/>
+				),
+				tabBarLabel: () => null,
+			}}
+		/>
+	</Tab.Navigator>
 );
