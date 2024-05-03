@@ -1,23 +1,45 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { nerds } from "../nerds/nerds";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Slider } from "@miblanchard/react-native-slider";
 import { SliderContainer } from "../shared/components/SliderContainer";
+import * as ImagePicker from "expo-image-picker";
 
 export function ProfilePage() {
   const [selectedGender, setSelectedGender] = React.useState();
   const [sliderValue, setSliderValue] = React.useState([18, 25]);
   const [date, setDate] = React.useState(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
+  const [images, setImages] = React.useState<any>([]);
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
     setShowDatePicker(false);
+  };
+
+  const addImage = async () => {
+    let result = (await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })) as any;
+
+    if (!result.cancelled) {
+      setImages([...images, result.uri]);
+    }
   };
 
   return (
@@ -96,6 +118,17 @@ export function ProfilePage() {
             thumbTintColor="#4B164C"
           />
         </SliderContainer>
+
+        <View style={styles.imageSlider}>
+          <ScrollView horizontal>
+            {images.map((image, index) => (
+              <Image key={index} source={{ uri: image }} style={styles.image} />
+            ))}
+            <TouchableOpacity style={styles.addButton} onPress={addImage}>
+              <Ionicons name="add" size={24} color="#4B164C" />
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -230,5 +263,23 @@ const styles = StyleSheet.create({
     color: "#DD88CF",
     textAlign: "center",
     top: 140,
+  },
+  imageSlider: {
+    marginTop: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+  },
+  addButton: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#4B164C",
+    borderRadius: 5,
+    marginRight: 10,
   },
 });
