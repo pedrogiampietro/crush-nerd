@@ -1,85 +1,84 @@
-import styled from '@emotion/native';
-import { Image } from 'expo-image';
-import { memo } from 'react';
+import styled from "@emotion/native";
+import { Image } from "expo-image";
+import { memo } from "react";
 import Animated, {
-	Extrapolation,
-	interpolate,
-	interpolateColor,
-	useAnimatedStyle,
-} from 'react-native-reanimated';
-import { type RenderCardProps } from 'react-native-swipeable-card-stack';
-import { colors } from '../shared/colors';
-import { type NerdAction } from './NerdAction';
-import { NerdCardBottomView } from './NerdCardBottomView';
-import { type NerdDataItem } from './NerdDataItem';
-import { Text } from 'react-native';
+  Extrapolation,
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { type RenderCardProps } from "react-native-swipeable-card-stack";
+import { colors } from "../shared/colors";
+import { type NerdAction } from "./NerdAction";
+import { NerdCardBottomView } from "./NerdCardBottomView";
+import { type NerdDataItem } from "./NerdDataItem";
 
 type Props = RenderCardProps<NerdDataItem> & {
-	onAction: (action: NerdAction) => void;
+  onAction: (action: NerdAction) => void;
 };
 
 export const NerdCard = memo(function CatCard({
-	data,
-	onAction,
-	xAnimationPosition,
-	status,
+  data,
+  onAction,
+  xAnimationPosition,
+  status,
 }: Props) {
-	const containerStyle = useAnimatedStyle(() => {
-		if (status !== 'current') {
-			return {};
-		}
-		return {
-			transform: [{ rotate: `${xAnimationPosition.value * 10}deg` }],
-			borderRadius: interpolate(
-				Math.abs(xAnimationPosition.value),
-				[0, 0.2],
-				[0, 16]
-			),
-		};
-	});
+  const containerStyle = useAnimatedStyle(() => {
+    if (status !== "current") {
+      return {};
+    }
+    return {
+      transform: [{ rotate: `${xAnimationPosition.value * 10}deg` }],
+      borderRadius: interpolate(
+        Math.abs(xAnimationPosition.value),
+        [0, 0.2],
+        [0, 16]
+      ),
+    };
+  });
 
-	const overlayStyle = useAnimatedStyle(() => {
-		if (status !== 'current') {
-			return {};
-		}
-		return {
-			backgroundColor: interpolateColor(
-				xAnimationPosition.value,
-				[-0.4, 0, 0.4],
-				[colors.swipeLeft, 'transparent', colors.swipeRight]
-			),
-			opacity: interpolate(
-				Math.abs(xAnimationPosition.value),
-				[0, 0.3],
-				[0, 0.8],
-				Extrapolation.CLAMP
-			),
-		};
-	});
+  const overlayStyle = useAnimatedStyle(() => {
+    if (status !== "current") {
+      return {};
+    }
+    return {
+      backgroundColor: interpolateColor(
+        xAnimationPosition.value,
+        [-0.4, 0, 0.4],
+        [colors.swipeLeft, "transparent", colors.swipeRight]
+      ),
+      opacity: interpolate(
+        Math.abs(xAnimationPosition.value),
+        [0, 0.3],
+        [0, 0.8],
+        Extrapolation.CLAMP
+      ),
+    };
+  });
 
-	return (
-		<Container style={containerStyle}>
-			<FullScreenImage source={{ uri: data.imageUrl }} />
-			<Overlay style={overlayStyle} />
-			<NerdCardBottomView name={data.name} age={data.age} onAction={onAction} />
-		</Container>
-	);
+  return (
+    <Container style={containerStyle}>
+      <FullScreenImage source={{ uri: data.imageUrl }} />
+      <Overlay style={overlayStyle} />
+      <NerdCardBottomView name={data.name} age={data.age} onAction={onAction} />
+    </Container>
+  );
 });
 
 const Container = styled(Animated.View)({
-	flex: 1,
-	overflow: 'hidden',
+  flex: 1,
+  overflow: "hidden",
 });
 
 const FullScreenImage = styled(Image)({
-	width: '100%',
-	height: '100%',
+  width: "100%",
+  height: "100%",
 });
 
 const Overlay = styled(Animated.View)({
-	position: 'absolute',
-	top: 0,
-	bottom: 0,
-	left: 0,
-	right: 0,
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
 });

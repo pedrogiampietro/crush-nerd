@@ -13,7 +13,7 @@ type Props = {
   name?: string;
   age?: number;
   onAction: (action: NerdAction) => void;
-  sizeButtons: string;
+  sizeButtons?: string;
 };
 
 export const NerdCardBottomView = ({

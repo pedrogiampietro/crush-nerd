@@ -14,6 +14,7 @@ export const nerds: NerdDataItem[] = [
     message: "What about that new jacket if I ...",
     lastMessageTime: "09:18",
     read: false,
+    matched: true,
   },
   {
     name: "Lily",
@@ -28,6 +29,7 @@ export const nerds: NerdDataItem[] = [
     message: "I know right 😉",
     lastMessageTime: "09:18",
     read: true,
+    matched: true,
   },
   {
     name: "Diego",
@@ -42,6 +44,7 @@ export const nerds: NerdDataItem[] = [
     message: "I’ve already registered, can’t wai...",
     lastMessageTime: "09:18",
     read: true,
+    matched: true,
   },
   {
     name: "Arnold",
@@ -56,6 +59,7 @@ export const nerds: NerdDataItem[] = [
     message: "It will have two lines of heading ...",
     lastMessageTime: "09:18",
     read: true,
+    matched: false,
   },
   {
     name: "Gus",
@@ -70,6 +74,7 @@ export const nerds: NerdDataItem[] = [
     message: "teste",
     lastMessageTime: "09:18",
     read: false,
+    matched: false,
   },
   {
     name: "Comma",
@@ -84,6 +89,7 @@ export const nerds: NerdDataItem[] = [
     message: "teste",
     lastMessageTime: "09:18",
     read: false,
+    matched: false,
   },
   {
     name: "Stan",
@@ -98,5 +104,6 @@ export const nerds: NerdDataItem[] = [
     message: "teste",
     lastMessageTime: "09:18",
     read: true,
+    matched: true,
   },
 ];

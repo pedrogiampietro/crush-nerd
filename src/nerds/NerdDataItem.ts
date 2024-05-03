@@ -10,4 +10,5 @@ export type NerdDataItem = {
   message: string;
   lastMessageTime: string;
   read: boolean;
+  matched: boolean;
 };

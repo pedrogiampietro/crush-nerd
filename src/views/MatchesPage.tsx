@@ -28,17 +28,24 @@ export function MatchesPage() {
     navigation.navigate("ProfileMatchPage", { match });
   };
 
+  const handleBackPress = () => {
+    navigation.navigate("NerdSwipePage");
+  };
+
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
 
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Ionicons name="arrow-back" size={24} color="#22172A" />
+        <TouchableOpacity
+          style={styles.iconContainerBack}
+          onPress={() => handleBackPress()}
+        >
+          <Ionicons name="arrow-back" size={16} color="#22172A" />
         </TouchableOpacity>
         <Text style={styles.title}>Matches</Text>
         <TouchableOpacity>
-          <Ionicons name="filter" size={24} color="#22172A" />
+          <Ionicons name="filter" size={16} color="#22172A" />
         </TouchableOpacity>
       </View>
 
@@ -167,6 +174,16 @@ const styles = StyleSheet.create({
     left: "50%",
     transform: [{ translateX: -15 }, { translateY: -32 }],
   },
+  iconContainerBack: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderColor: "#22172A",
+    borderWidth: 1,
+    borderRadius: 24,
+    width: 32,
+    height: 32,
+  },
   matchesTitle: {
     color: "#000000",
     fontSize: 14,
@@ -188,6 +205,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    marginBottom: 230,
+    marginBottom: 320,
   },
 });

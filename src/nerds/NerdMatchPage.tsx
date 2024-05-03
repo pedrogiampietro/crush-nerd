@@ -17,7 +17,7 @@ export type MatchPageParams = {
 };
 
 export const NerdMatchPage = () => {
-  const { params } = useRoute<RouteProp<RootStackParamList, "NerdMatch">>();
+  const { params } = useRoute<RouteProp<RootStackParamList, "NerdMatchPage">>();
   const { bottom } = useSafeAreaInsets();
   const nerd = nerds.find((_) => _.name === params.nerdName);
 

@@ -21,6 +21,7 @@ import { type NerdAction } from "../nerds/NerdAction";
 import { NerdCardBottomView } from "../nerds/NerdCardBottomView";
 import { SwipeableCardStackRef } from "react-native-swipeable-card-stack";
 import { MatchBadge } from "../shared/components/MatchBadge";
+import { useNavigation } from "@react-navigation/native";
 
 const interests = [
   { icon: "leaf", text: "Nature" },
@@ -66,6 +67,7 @@ export function ProfileMatchPage({ route }: any) {
   const { match } = route.params;
   const isOpen = useSharedValue(true);
   const ref = useRef<SwipeableCardStackRef>(null);
+  const navigation = useNavigation() as any;
 
   const toggleSheet = () => {
     isOpen.value = !isOpen.value;
@@ -98,16 +100,23 @@ export function ProfileMatchPage({ route }: any) {
     );
   }
 
+  const handleBackPress = () => {
+    navigation.navigate("MatchesPage");
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.profilePic} source={{ uri: match.imageUrl }} />
       <View style={styles.overlay}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.iconContainer}>
-            <Ionicons name="arrow-back" size={24} color="#FFF" />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => handleBackPress()}
+          >
+            <Ionicons name="arrow-back" size={16} color="#FFF" />
           </TouchableOpacity>
           <View style={styles.distanceContainer}>
-            <MaterialIcons name="location-on" size={24} color="#FFF" />
+            <MaterialIcons name="location-on" size={16} color="#FFF" />
             <Text style={styles.distance}>{match.distance}km away</Text>
           </View>
         </View>
@@ -151,9 +160,11 @@ export function ProfileMatchPage({ route }: any) {
         />
       </BottomSheet>
 
-      <View style={styles.bottomView}>
-        <NerdCardBottomView onAction={onAction} sizeButtons="small" />
-      </View>
+      {match.matched ? null : (
+        <View style={styles.bottomView}>
+          <NerdCardBottomView onAction={onAction} sizeButtons="small" />
+        </View>
+      )}
     </View>
   );
 }
@@ -188,8 +199,8 @@ const styles = StyleSheet.create({
     borderColor: "#FFF",
     borderWidth: 1,
     borderRadius: 24,
-    width: 48,
-    height: 48,
+    width: 32,
+    height: 32,
   },
   distanceContainer: {
     flexDirection: "row",
@@ -199,8 +210,8 @@ const styles = StyleSheet.create({
     borderColor: "#FFF",
     borderWidth: 1,
     borderRadius: 20,
-    width: 120,
-    height: 40,
+    width: 100,
+    height: 30,
   },
   distance: {
     fontSize: 14,
