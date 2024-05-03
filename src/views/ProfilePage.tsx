@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  ToastAndroid,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -30,16 +32,32 @@ export function ProfilePage() {
   };
 
   const addImage = async () => {
-    let result = (await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    })) as any;
+    const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!granted) {
+      Alert.alert(
+        "Permissão necessária",
+        "Permita que sua aplicação acesse as imagens"
+      );
+    } else {
+      const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        base64: false,
+        aspect: [4, 4],
+        quality: 1,
+      });
 
-    if (!result.cancelled) {
-      setImages([...images, result.uri]);
+      if (canceled) {
+        ToastAndroid.show("Operação cancelada", ToastAndroid.SHORT);
+      } else {
+        setImages([...images, assets[0]?.uri]);
+      }
     }
+  };
+
+  const deleteImage = (indexToDelete) => {
+    const updatedImages = images.filter((_, index) => index !== indexToDelete);
+    setImages(updatedImages);
   };
 
   return (
@@ -122,7 +140,15 @@ export function ProfilePage() {
         <View style={styles.imageSlider}>
           <ScrollView horizontal>
             {images.map((image, index) => (
-              <Image key={index} source={{ uri: image }} style={styles.image} />
+              <View key={index} style={styles.imageContainer}>
+                <Image source={{ uri: image }} style={styles.image} />
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => deleteImage(index)}
+                >
+                  <Ionicons name="trash-outline" size={24} color="#FFF" />
+                </TouchableOpacity>
+              </View>
             ))}
             <TouchableOpacity style={styles.addButton} onPress={addImage}>
               <Ionicons name="add" size={24} color="#4B164C" />
@@ -281,5 +307,13 @@ const styles = StyleSheet.create({
     borderColor: "#4B164C",
     borderRadius: 5,
     marginRight: 10,
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 5,
+    right: 15,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    borderRadius: 12,
+    padding: 4,
   },
 });
