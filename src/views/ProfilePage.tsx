@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Button,
-} from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { nerds } from "../nerds/nerds";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Slider } from "@miblanchard/react-native-slider";
+import { SliderContainer } from "../shared/components/SliderContainer";
 
 export function ProfilePage() {
   const [selectedGender, setSelectedGender] = React.useState();
@@ -21,7 +14,7 @@ export function ProfilePage() {
   const [date, setDate] = React.useState(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
     setShowDatePicker(false);
@@ -84,15 +77,17 @@ export function ProfilePage() {
 
         <Text style={styles.label}>I am interested in</Text>
 
-        <Slider
-          animateTransitions
-          maximumTrackTintColor="#d3d3d3"
-          maximumValue={20}
-          minimumTrackTintColor="#1fb28a"
-          minimumValue={4}
-          step={2}
-          thumbTintColor="#1a9274"
-        />
+        <SliderContainer sliderValue={[18, 25]}>
+          <Slider
+            animateTransitions
+            maximumTrackTintColor="#DD88CF"
+            maximumValue={90}
+            minimumTrackTintColor="#4B164C"
+            minimumValue={18}
+            step={1}
+            thumbTintColor="#4B164C"
+          />
+        </SliderContainer>
       </View>
     </View>
   );

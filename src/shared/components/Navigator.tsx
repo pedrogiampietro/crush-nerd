@@ -37,7 +37,7 @@ const MainTabNavigator = () => (
     initialRouteName="MatchesPage"
     screenOptions={({ route }) => ({
       headerShown: false,
-      tabBarActiveTintColor: "#F63A6E",
+      tabBarActiveTintColor: "#DD88CF",
       tabBarStyle: {
         backgroundColor: "#FFFFFF",
         borderTopColor: "transparent",
