@@ -3,10 +3,11 @@ import React from "react";
 import { Slider } from "@miblanchard/react-native-slider";
 
 export function SliderContainer(props) {
-  const { caption, sliderValue, trackMarks } = props;
+  const { sliderValue, trackMarks, onValueChange } = props;
   const [value, setValue] = React.useState(
     sliderValue ? sliderValue : DEFAULT_VALUE
   );
+
   let renderTrackMarkComponent;
 
   if (trackMarks?.length && (!Array.isArray(value) || value?.length === 1)) {
@@ -21,11 +22,16 @@ export function SliderContainer(props) {
     };
   }
 
+  const handleValueChange = (newValue) => {
+    setValue(newValue);
+    onValueChange(newValue);
+  };
+
   const renderChildren = () => {
     return React.Children.map(props.children, (child) => {
       if (!!child && child.type === Slider) {
         return React.cloneElement(child, {
-          onValueChange: setValue,
+          onValueChange: handleValueChange,
           renderTrackMarkComponent,
           trackMarks,
           value,

@@ -10,7 +10,7 @@ import { SliderContainer } from "../shared/components/SliderContainer";
 
 export function ProfilePage() {
   const [selectedGender, setSelectedGender] = React.useState();
-  const [selectedAge, setSelectedAge] = React.useState();
+  const [sliderValue, setSliderValue] = React.useState([18, 25]);
   const [date, setDate] = React.useState(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
 
@@ -39,14 +39,17 @@ export function ProfilePage() {
             </View>
           </TouchableOpacity>
         </View>
+
+        <Text style={styles.name}>Pedro Giampietro</Text>
+        <Text style={styles.age}>29 anos</Text>
       </View>
 
       <View style={styles.card}>
         <View style={[styles.row, styles.birthdayContainer]}>
-          <Text style={styles.label}>My birthday</Text>
+          <Text style={styles.label}>Meu aniversário</Text>
           <View style={styles.rightContainer}>
             <TouchableOpacity onPress={() => setShowDatePicker(true)}>
-              <FontAwesome name="calendar" size={24} color="black" />
+              <FontAwesome name="calendar" size={16} color="black" />
             </TouchableOpacity>
             {showDatePicker && (
               <DateTimePicker
@@ -61,7 +64,7 @@ export function ProfilePage() {
         </View>
 
         <View style={[styles.row, styles.genderContainer]}>
-          <Text style={styles.label}>My gender</Text>
+          <Text style={styles.label}>Eu me considero</Text>
           <View style={styles.genderPickerContainer}>
             <Picker
               selectedValue={selectedGender}
@@ -75,9 +78,14 @@ export function ProfilePage() {
           </View>
         </View>
 
-        <Text style={styles.label}>I am interested in</Text>
+        <Text style={styles.label}>
+          Me interesso por pessoas na faixa etaria de:{" "}
+        </Text>
 
-        <SliderContainer sliderValue={[18, 25]}>
+        <SliderContainer
+          sliderValue={sliderValue}
+          onValueChange={setSliderValue}
+        >
           <Slider
             animateTransitions
             maximumTrackTintColor="#DD88CF"
@@ -128,12 +136,12 @@ const styles = StyleSheet.create({
     width: 177,
     height: 215,
     borderRadius: 10,
-    marginBottom: -50,
+    marginBottom: -120,
   },
   editIconContainer: {
     position: "absolute",
-    bottom: -40,
-    right: 10,
+    bottom: -110,
+    right: 15,
     backgroundColor: "#FFF",
     borderRadius: 5,
   },
@@ -152,14 +160,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingLeft: 10,
   },
-  picker: {
-    height: 50,
-    marginBottom: 20,
-  },
   row: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    top: 110,
     marginTop: 40,
   },
   birthdayContainer: {
@@ -169,12 +174,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: 154,
-    height: 56,
+    height: 40,
+    paddingHorizontal: 10,
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    paddingHorizontal: 10,
     justifyContent: "space-between",
-    borderRadius: 20,
+    borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -186,13 +191,18 @@ const styles = StyleSheet.create({
   },
   genderContainer: {
     alignItems: "center",
+    marginBottom: 160,
   },
   genderPickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     width: 154,
-    height: 56,
+    height: 40,
+    paddingHorizontal: 10,
     backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -201,5 +211,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
+  },
+  picker: {
+    width: 150,
+    height: 40,
+    textAlign: "center",
+  },
+  name: {
+    fontSize: 24,
+    fontFamily: "roboto-bold",
+    color: "#DD88CF",
+    textAlign: "center",
+    top: 140,
+  },
+  age: {
+    fontSize: 20,
+    fontFamily: "roboto-medium",
+    color: "#DD88CF",
+    textAlign: "center",
+    top: 140,
   },
 });
