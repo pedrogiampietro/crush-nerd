@@ -2,8 +2,44 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import {
+	GoogleSignin,
+	GoogleSigninButton,
+	statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 export function LoginPage() {
+	const [error, setError] = React.useState<string>();
+	const [userInfo, setUserInfo] = React.useState<any>();
+
+	const configureGoogleSignIn = () => {
+		GoogleSignin.configure({
+			iosClientId:
+				'391328285531-l7941nusgsb8eeb82lrnu6f9js218lan.apps.googleusercontent.com',
+			webClientId:
+				'391328285531-q27s3lk3go4p1h6i6d1pbkfcu4ac868n.apps.googleusercontent.com',
+		});
+	};
+
+	React.useEffect(() => {
+		configureGoogleSignIn();
+	});
+
+	const signIn = async () => {
+		console.log('Pressed sign in');
+
+		try {
+			await GoogleSignin.hasPlayServices();
+			const responseUser = await GoogleSignin.signIn();
+
+			console.log('responseUser', responseUser);
+			setUserInfo(responseUser);
+			setError('');
+		} catch (e: any) {
+			console.log('e', e);
+			setError(e);
+		}
+	};
 	return (
 		<View style={styles.container}>
 			<StatusBar style='auto' />
@@ -24,7 +60,7 @@ export function LoginPage() {
 				<Text style={styles.buttonText}>Entrar com número telefone</Text>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.googleButton} onPress={() => {}}>
+			<TouchableOpacity style={styles.googleButton} onPress={signIn}>
 				<Ionicons name='logo-google' size={24} color='#4B164C' />
 				<Text style={styles.googleButtonText}>Login com Google</Text>
 			</TouchableOpacity>
