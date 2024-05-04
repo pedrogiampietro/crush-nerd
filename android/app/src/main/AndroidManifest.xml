@@ -26,9 +26,8 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.authenticator.fanficmobile"/>
+        <data android:scheme="com.authentication.fanfic"/>
         <data android:scheme="exp+fanfic-match"/>
-        <data android:scheme="com.authentication.fanficmobile"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

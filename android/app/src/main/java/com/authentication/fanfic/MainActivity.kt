@@ -1,4 +1,4 @@
-package com.authentication.fanficmobile
+package com.authentication.fanfic
 
 import android.os.Build
 import android.os.Bundle

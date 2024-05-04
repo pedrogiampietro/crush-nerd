@@ -1,4 +1,4 @@
-package com.authentication.fanficmobile
+package com.authentication.fanfic
 
 import android.app.Application
 import android.content.res.Configuration

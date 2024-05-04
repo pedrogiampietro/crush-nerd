@@ -1,48 +1,53 @@
 {
-	"expo": {
-		"name": "fanfic-match",
-		"slug": "fanfic-match",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-		"userInterfaceStyle": "light",
-		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true,
-			"bundleIdentifier": "com.authentication.fanficmobile",
-			"infoPlist": {
-				"CFBundleURLTypes": [
-					{
-						"CFBundleURLSchemes": [
-							"com.googleusercontent.apps.391328285531-l7941nusgsb8eeb82lrnu6f9js218lan"
-						]
-					}
-				]
-			}
-		},
-		"extra": {
-			"eas": {
-				"projectId": "44823e65-f0a2-4a28-aed5-33184161eff4"
-			}
-		},
-		"android": {
-			"package": "com.authentication.fanficmobile"
-		}
-	},
-	"android": {
-		"adaptiveIcon": {
-			"foregroundImage": "./assets/adaptive-icon.png",
-			"backgroundColor": "#ffffff",
-			"package": "com.authentication.fanficmobile"
-		}
-	},
-	"web": {
-		"favicon": "./assets/favicon.png"
-	},
-	"plugins": ["expo-font"]
+  "expo": {
+    "name": "fanfic-match",
+    "slug": "fanfic-match",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.authentication.fanfic",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.391328285531-t3li26shasv58b7dkgaa145irgh315nk"
+            ]
+          }
+        ]
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2ba1510f-503e-40e9-a04b-6b8df86885ac"
+      }
+    },
+    "android": {
+      "package": "com.authentication.fanfic"
+    }
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#ffffff",
+      "package": "com.authentication.fanfic"
+    }
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  },
+  "plugins": [
+    "expo-router",
+    "@react-native-google-signin/google-signin"
+  ]
 }

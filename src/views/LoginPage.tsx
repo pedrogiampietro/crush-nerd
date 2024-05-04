@@ -12,12 +12,15 @@ export function LoginPage() {
 	const [error, setError] = React.useState<string>();
 	const [userInfo, setUserInfo] = React.useState<any>();
 
-	const configureGoogleSignIn = () => {
+	const configureGoogleSignIn = async () => {
 		GoogleSignin.configure({
-			iosClientId:
-				'391328285531-l7941nusgsb8eeb82lrnu6f9js218lan.apps.googleusercontent.com',
-			webClientId:
-				'391328285531-q27s3lk3go4p1h6i6d1pbkfcu4ac868n.apps.googleusercontent.com',
+			scopes: [
+				'https://www.googleapis.com/auth/',
+				'https://www.googleapis.com/auth/userinfo.email',
+			],
+			webClientId: '',
+			offlineAccess: false,
+			forceCodeForRefreshToken: false,
 		});
 	};
 
