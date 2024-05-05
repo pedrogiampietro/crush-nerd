@@ -14,13 +14,12 @@ export function LoginPage() {
 
 	const configureGoogleSignIn = async () => {
 		GoogleSignin.configure({
-			scopes: [
-				'https://www.googleapis.com/auth/',
-				'https://www.googleapis.com/auth/userinfo.email',
-			],
-			webClientId: '',
-			offlineAccess: false,
-			forceCodeForRefreshToken: false,
+			scopes: ['https://wwww.googleapis.com/auth/drive.readonly'],
+			webClientId:
+				'391328285531-c5kafm544djq9ms40st564u5iufvvljv.apps.googleusercontent.com',
+			iosClientId:
+				'391328285531-t3li26shasv58b7dkgaa145irgh315nk.apps.googleusercontent.com',
+			forceCodeForRefreshToken: true,
 		});
 	};
 
@@ -58,9 +57,9 @@ export function LoginPage() {
 
 			<TouchableOpacity style={styles.button} onPress={() => {}}>
 				<View style={styles.iconContainer}>
-					<Ionicons name='call' size={24} color='black' />
+					<Ionicons name='mail-outline' size={24} color='black' />
 				</View>
-				<Text style={styles.buttonText}>Entrar com número telefone</Text>
+				<Text style={styles.buttonText}>Entrar com E-mail</Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity style={styles.googleButton} onPress={signIn}>

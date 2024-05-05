@@ -14,6 +14,8 @@ import { LoginPage } from '../../views/LoginPage';
 import { ChatPage } from '../../views/ChatPage';
 import { NerdSwipePage } from '../../nerds/NerdSwipePage';
 import { ProfilePage } from '../../views/ProfilePage';
+import { RegisterPage } from '../../views/RegisterPage';
+import { VerifyEmailPage } from '../../views/VerifyEmailPage';
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -27,6 +29,8 @@ export type RootStackParamList = {
 	MessagePage: undefined;
 	ChatPage: undefined;
 	ProfilePage: undefined;
+	RegisterPage: undefined;
+	VerifyEmailPage: undefined;
 };
 
 const MainTab = createBottomTabNavigator<RootStackParamList>();
@@ -138,8 +142,9 @@ export const Navigator = () => (
 			<MainStack.Screen name='ProfileMatchPage' component={ProfileMatchPage} />
 			<MainStack.Screen name='NerdMatchPage' component={NerdMatchPage} />
 			<MainStack.Screen name='ConnectionOption' component={ConnectionOptions} />
-			<MainStack.Screen name='LoginPage' component={LoginPage} />
+			<MainStack.Screen name='RegisterPage' component={RegisterPage} />
 			<MainStack.Screen name='ChatPage' component={ChatPage} />
+			<MainStack.Screen name='VerifyEmailPage' component={VerifyEmailPage} />
 		</MainStack.Navigator>
 	</NavigationContainer>
 );

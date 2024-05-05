@@ -1,4 +1,4 @@
-rootProject.name = 'fanfic-match'
+rootProject.name = 'fanficmatch'
 
 dependencyResolutionManagement {
   versionCatalogs {
