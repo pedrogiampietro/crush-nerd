@@ -8,15 +8,19 @@ import {
   ScrollView,
   Alert,
   ToastAndroid,
+  TextInput,
 } from "react-native";
+import styled, { css } from "@emotion/native";
 import { StatusBar } from "expo-status-bar";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { nerds } from "../nerds/nerds";
-import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Slider } from "@miblanchard/react-native-slider";
 import { SliderContainer } from "../shared/components/SliderContainer";
 import * as ImagePicker from "expo-image-picker";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { GoToHomeButton } from "../shared/components/GoToHomeButton";
+import { useNavigation } from "@react-navigation/native";
 
 export function ProfilePage() {
   const [selectedGender, setSelectedGender] = React.useState();
@@ -24,11 +28,24 @@ export function ProfilePage() {
   const [date, setDate] = React.useState(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
   const [images, setImages] = React.useState<any>([]);
+  const [name, setName] = React.useState("");
+  const [aboutMe, setAboutMe] = React.useState("");
+
+  const navigation = useNavigation() as any;
+  const { top } = useSafeAreaInsets();
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
     setShowDatePicker(false);
+  };
+
+  const handleGenderSelect = (gender: any) => {
+    setSelectedGender(gender);
+  };
+
+  const handleSave = () => {
+    navigation.navigate("MatchesPage");
   };
 
   const addImage = async () => {
@@ -55,107 +72,182 @@ export function ProfilePage() {
     }
   };
 
-  const deleteImage = (indexToDelete) => {
-    const updatedImages = images.filter((_, index) => index !== indexToDelete);
+  const deleteImage = (indexToDelete: number) => {
+    const updatedImages = images.filter(
+      (_: any, index: number) => index !== indexToDelete
+    );
     setImages(updatedImages);
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-      <Image style={styles.backgroundHeader} />
+      <GoToHomeButtonContainer style={css({ top: top + 16, zIndex: 9 })}>
+        <GoToHomeButton />
+      </GoToHomeButtonContainer>
+      <ScrollView>
+        <StatusBar style="light" />
+        <Image style={styles.backgroundHeader} />
 
-      <View style={styles.avatarContainer}>
-        <View style={styles.imageIconContainer}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: nerds[0]?.imageUrl }}
-            resizeMode="cover"
-          />
+        <View style={styles.avatarContainer}>
+          <View style={styles.imageIconContainer}>
+            <Image
+              style={styles.avatar}
+              source={{ uri: nerds[0]?.imageUrl }}
+              resizeMode="cover"
+            />
 
-          <TouchableOpacity style={styles.editIconContainer}>
-            <View style={styles.editIconBackground}>
-              <AntDesign name="edit" size={24} color="#4B164C" />
+            <TouchableOpacity style={styles.editIconContainer}>
+              <View style={styles.editIconBackground}>
+                <AntDesign name="edit" size={24} color="#4B164C" />
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.name}>Pedro Giampietro</Text>
+          <Text style={styles.age}>29 anos</Text>
+        </View>
+
+        <View style={styles.card}>
+          <View style={[styles.content]}>
+            <Text style={styles.label}>Meu nome</Text>
+            <View style={styles.valueContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Como gostaria que te apresentássemos?"
+                value={name}
+                onChangeText={setName}
+              />
             </View>
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.label}>Meu aniversário</Text>
+            <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+              <View style={styles.valueContainer}>
+                <FontAwesome name="calendar" size={16} color="black" />
+
+                {showDatePicker && (
+                  <DateTimePicker
+                    value={date}
+                    mode={"date"}
+                    display="default"
+                    onChange={onChange}
+                  />
+                )}
+                <Text>{date.toLocaleDateString()}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[styles.content]}>
+            <Text style={styles.label}>Sobre mim</Text>
+            <View style={styles.valueTextAreaContainer}>
+              <TextInput
+                style={styles.textarea}
+                placeholder="Conte alguma coisa legal sobre você"
+                value={aboutMe}
+                onChangeText={setAboutMe}
+                multiline
+              />
+            </View>
+          </View>
+
+          <View style={[styles.content, styles.genderContainer]}>
+            <Text style={styles.label}>Sexo</Text>
+            <View style={styles.buttonGenderContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  selectedGender === "Homem" && styles.buttonActive,
+                ]}
+                onPress={() => handleGenderSelect("Homem")}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedGender === "Homem" && styles.buttonTextActive,
+                  ]}
+                >
+                  Homem
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  selectedGender === "Mulher" && styles.buttonActive,
+                ]}
+                onPress={() => handleGenderSelect("Mulher")}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedGender === "Mulher" && styles.buttonTextActive,
+                  ]}
+                >
+                  Mulher
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  selectedGender === "Outro" && styles.buttonActive,
+                ]}
+                onPress={() => handleGenderSelect("Outro")}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedGender === "Outro" && styles.buttonTextActive,
+                  ]}
+                >
+                  Outro
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <Text style={styles.label}>
+            Me interesso por pessoas na faixa etaria de:{" "}
+          </Text>
+
+          <SliderContainer
+            sliderValue={sliderValue}
+            onValueChange={setSliderValue}
+          >
+            <Slider
+              animateTransitions
+              maximumTrackTintColor="#DD88CF"
+              maximumValue={90}
+              minimumTrackTintColor="#4B164C"
+              minimumValue={18}
+              step={1}
+              thumbTintColor="#4B164C"
+            />
+          </SliderContainer>
+
+          <View style={styles.imageSlider}>
+            <ScrollView horizontal>
+              {images.map((image: any, index: number) => (
+                <View key={index}>
+                  <Image source={{ uri: image }} style={styles.image} />
+                  <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={() => deleteImage(index)}
+                  >
+                    <Ionicons name="trash-outline" size={24} color="#FFF" />
+                  </TouchableOpacity>
+                </View>
+              ))}
+              <TouchableOpacity style={styles.addButton} onPress={addImage}>
+                <Ionicons name="add" size={24} color="#4B164C" />
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+
+          <TouchableOpacity style={styles.buttonSave} onPress={handleSave}>
+            <Text style={styles.buttonTextActive}>Salvar</Text>
           </TouchableOpacity>
         </View>
-
-        <Text style={styles.name}>Pedro Giampietro</Text>
-        <Text style={styles.age}>29 anos</Text>
-      </View>
-
-      <View style={styles.card}>
-        <View style={[styles.row, styles.birthdayContainer]}>
-          <Text style={styles.label}>Meu aniversário</Text>
-          <View style={styles.rightContainer}>
-            <TouchableOpacity onPress={() => setShowDatePicker(true)}>
-              <FontAwesome name="calendar" size={16} color="black" />
-            </TouchableOpacity>
-            {showDatePicker && (
-              <DateTimePicker
-                value={date}
-                mode={"date"}
-                display="default"
-                onChange={onChange}
-              />
-            )}
-            <Text>{date.toLocaleDateString()}</Text>
-          </View>
-        </View>
-
-        <View style={[styles.row, styles.genderContainer]}>
-          <Text style={styles.label}>Eu me considero</Text>
-          <View style={styles.genderPickerContainer}>
-            <Picker
-              selectedValue={selectedGender}
-              onValueChange={(itemValue) => setSelectedGender(itemValue)}
-              style={styles.picker}
-            >
-              <Picker.Item label="Homem" value="Homem" />
-              <Picker.Item label="Mulher" value="Mulher" />
-              <Picker.Item label="Outro" value="Outro" />
-            </Picker>
-          </View>
-        </View>
-
-        <Text style={styles.label}>
-          Me interesso por pessoas na faixa etaria de:{" "}
-        </Text>
-
-        <SliderContainer
-          sliderValue={sliderValue}
-          onValueChange={setSliderValue}
-        >
-          <Slider
-            animateTransitions
-            maximumTrackTintColor="#DD88CF"
-            maximumValue={90}
-            minimumTrackTintColor="#4B164C"
-            minimumValue={18}
-            step={1}
-            thumbTintColor="#4B164C"
-          />
-        </SliderContainer>
-
-        <View style={styles.imageSlider}>
-          <ScrollView horizontal>
-            {images.map((image, index) => (
-              <View key={index} style={styles.imageContainer}>
-                <Image source={{ uri: image }} style={styles.image} />
-                <TouchableOpacity
-                  style={styles.deleteButton}
-                  onPress={() => deleteImage(index)}
-                >
-                  <Ionicons name="trash-outline" size={24} color="#FFF" />
-                </TouchableOpacity>
-              </View>
-            ))}
-            <TouchableOpacity style={styles.addButton} onPress={addImage}>
-              <Ionicons name="add" size={24} color="#4B164C" />
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -173,14 +265,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     paddingTop: 55,
+    paddingBottom: 90,
     paddingHorizontal: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     marginTop: -35,
   },
   label: {
-    fontSize: 16,
+    fontSize: 20,
     color: "#000",
+    fontFamily: "roboto-bold",
     marginBottom: 10,
   },
   avatarContainer: {
@@ -213,32 +307,54 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   input: {
-    height: 40,
-    borderColor: "gray",
+    width: "100%",
+    height: 54,
+    backgroundColor: "#ECECEC",
+    borderColor: "transparent",
     borderWidth: 1,
+    paddingLeft: 10,
+    borderRadius: 15,
+  },
+  textarea: {
+    height: 100,
     marginBottom: 20,
     paddingLeft: 10,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    top: 110,
-    marginTop: 40,
-  },
-  birthdayContainer: {
-    alignItems: "center",
-  },
-  rightContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 154,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    justifyContent: "space-between",
     borderRadius: 5,
+  },
+  valueTextAreaContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: 100,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    backgroundColor: "#ECECEC",
+    justifyContent: "space-between",
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  content: {
+    justifyContent: "flex-start",
+    top: 110,
+    marginTop: 10,
+  },
+  valueContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    height: 54,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    backgroundColor: "#ECECEC",
+    justifyContent: "space-between",
+    borderRadius: 15,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -249,46 +365,56 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   genderContainer: {
-    alignItems: "center",
     marginBottom: 160,
   },
-  genderPickerContainer: {
+  buttonGenderContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    width: 154,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5,
+    justifyContent: "space-around",
   },
-  picker: {
-    width: 150,
-    height: 40,
-    textAlign: "center",
+  button: {
+    width: 110,
+    marginTop: 20,
+    borderColor: "#4B164C",
+    borderWidth: 1,
+    padding: 10,
+    alignItems: "center",
+  },
+  buttonSave: {
+    width: "100%",
+    marginTop: 20,
+    backgroundColor: "#4B164C",
+    borderWidth: 1,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonActive: {
+    backgroundColor: "#4B164C",
+  },
+  buttonText: {
+    color: "#4B164C",
+    fontFamily: "roboto-bold",
+    fontSize: 16,
+  },
+  buttonTextActive: {
+    color: "#FFFFFF",
+    fontFamily: "roboto-bold",
+    fontSize: 16,
   },
   name: {
     fontSize: 24,
     fontFamily: "roboto-bold",
-    color: "#DD88CF",
+    color: "#4B164C",
     textAlign: "center",
-    top: 140,
+    top: 120,
   },
   age: {
     fontSize: 20,
     fontFamily: "roboto-medium",
-    color: "#DD88CF",
+    color: "#4B164C",
     textAlign: "center",
-    top: 140,
+    top: 120,
   },
   imageSlider: {
     marginTop: 20,
@@ -316,4 +442,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 4,
   },
+});
+
+const GoToHomeButtonContainer = styled.View({
+  position: "absolute",
+  left: 16,
 });

@@ -1,137 +1,110 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
-import {
-	GoogleSignin,
-	GoogleSigninButton,
-	statusCodes,
-} from '@react-native-google-signin/google-signin';
+import React from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
 export function LoginPage() {
-	const [error, setError] = React.useState<string>();
-	const [userInfo, setUserInfo] = React.useState<any>();
+  const navigation = useNavigation() as any;
 
-	const configureGoogleSignIn = async () => {
-		GoogleSignin.configure({
-			scopes: ['https://wwww.googleapis.com/auth/drive.readonly'],
-			webClientId:
-				'391328285531-c5kafm544djq9ms40st564u5iufvvljv.apps.googleusercontent.com',
-			iosClientId:
-				'391328285531-t3li26shasv58b7dkgaa145irgh315nk.apps.googleusercontent.com',
-			forceCodeForRefreshToken: true,
-		});
-	};
+  const signIn = async () => {
+    console.log("Pressed sign in");
+  };
 
-	React.useEffect(() => {
-		configureGoogleSignIn();
-	});
+  const handleRegister = () => {
+    navigation.navigate("RegisterPage");
+  };
 
-	const signIn = async () => {
-		console.log('Pressed sign in');
+  return (
+    <View style={styles.container}>
+      <StatusBar style="auto" />
 
-		try {
-			await GoogleSignin.hasPlayServices();
-			const responseUser = await GoogleSignin.signIn();
+      <Image
+        style={styles.image}
+        source={require("../../assets/people-ground.png")}
+      />
 
-			console.log('responseUser', responseUser);
-			setUserInfo(responseUser);
-			setError('');
-		} catch (e: any) {
-			console.log('e', e);
-			setError(e);
-		}
-	};
-	return (
-		<View style={styles.container}>
-			<StatusBar style='auto' />
+      <Text style={styles.title}>
+        Vamos conhecer novas pessoas ao seu redor
+      </Text>
 
-			<Image
-				style={styles.image}
-				source={require('../../assets/people-ground.png')}
-			/>
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <View style={styles.iconContainer}>
+          <Ionicons name="mail-outline" size={24} color="black" />
+        </View>
+        <Text style={styles.buttonText}>Entrar com e-mail</Text>
+      </TouchableOpacity>
+      {/* 
+      <TouchableOpacity style={styles.googleButton} onPress={signIn}>
+        <Ionicons name="logo-google" size={24} color="#4B164C" />
+        <Text style={styles.googleButtonText}>Login com Google</Text>
+      </TouchableOpacity> */}
 
-			<Text style={styles.title}>
-				Vamos conhecer novas pessoas ao seu redor
-			</Text>
-
-			<TouchableOpacity style={styles.button} onPress={() => {}}>
-				<View style={styles.iconContainer}>
-					<Ionicons name='mail-outline' size={24} color='black' />
-				</View>
-				<Text style={styles.buttonText}>Entrar com E-mail</Text>
-			</TouchableOpacity>
-
-			<TouchableOpacity style={styles.googleButton} onPress={signIn}>
-				<Ionicons name='logo-google' size={24} color='#4B164C' />
-				<Text style={styles.googleButtonText}>Login com Google</Text>
-			</TouchableOpacity>
-
-			<Text style={styles.signup}>
-				Você ainda não tem uma conta?{' '}
-				<Text style={styles.signupLink} onPress={() => {}}>
-					Crie agora!
-				</Text>
-			</Text>
-		</View>
-	);
+      <Text style={styles.signup}>
+        Você ainda não tem uma conta?{" "}
+        <Text style={styles.signupLink} onPress={handleRegister}>
+          Crie agora!
+        </Text>
+      </Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	button: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		backgroundColor: '#4B164C',
-		padding: 10,
-		borderRadius: 50,
-		marginTop: 10,
-	},
-	iconContainer: {
-		backgroundColor: 'white',
-		borderRadius: 50,
-		padding: 5,
-		marginRight: 10,
-	},
-	buttonText: {
-		color: 'white',
-		fontSize: 16,
-	},
-	googleButton: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		borderColor: '#4B164C',
-		borderWidth: 1,
-		padding: 10,
-		borderRadius: 50,
-		marginTop: 10,
-	},
-	googleButtonText: {
-		color: '#4B164C',
-		fontSize: 16,
-		marginLeft: 10,
-	},
-	image: {
-		width: 300,
-		height: 300,
-	},
-	title: {
-		width: 300,
-		fontSize: 24,
-		color: '#22172A',
-		textAlign: 'center',
-		fontFamily: 'roboto-bold',
-		marginVertical: 20,
-	},
-	signup: {
-		marginTop: 20,
-	},
-	signupLink: {
-		color: '#DD88CF',
-		fontFamily: 'roboto-bold',
-	},
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#4B164C",
+    padding: 10,
+    borderRadius: 50,
+    marginTop: 10,
+  },
+  iconContainer: {
+    backgroundColor: "white",
+    borderRadius: 50,
+    padding: 5,
+    marginRight: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+  },
+  googleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#4B164C",
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 50,
+    marginTop: 10,
+  },
+  googleButtonText: {
+    color: "#4B164C",
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+  title: {
+    width: 300,
+    fontSize: 24,
+    color: "#22172A",
+    textAlign: "center",
+    fontFamily: "roboto-bold",
+    marginVertical: 20,
+  },
+  signup: {
+    marginTop: 20,
+  },
+  signupLink: {
+    color: "#DD88CF",
+    fontFamily: "roboto-bold",
+  },
 });
